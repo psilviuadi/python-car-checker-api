@@ -79,9 +79,7 @@ The API will be available at:
 - API documentation: http://localhost:8000/docs
 
 ## API Endpoints
-
-- `GET /`: Root endpoint
-- `GET /items/{item_id}`: Get item by ID with optional query parameter
+Read from the documentation
 
 ## Development
 
