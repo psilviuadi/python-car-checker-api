@@ -55,6 +55,40 @@ def getMotAccessToken() -> Optional[str]:
     
     return None
 
+def get_ves_data(registration: str) -> dict:
+    """Get VES data for a vehicle registration number."""
+    registration = registration.strip().upper()
+    
+    ves_url = os.getenv('VES_URL')
+    ves_api_key = os.getenv('VES_API_KEY')
+    
+    headers = {
+        'x-api-key': ves_api_key,
+        'Content-Type': 'application/json',
+    }
+    
+    data = {
+        'registrationNumber': registration,
+    }
+    
+    try:
+        response = requests.post(ves_url, headers=headers, json=data)
+        
+        if not response.ok:
+            logging.error(f"get_ves_data - response not ok: {response.json()}")
+            return {"error": "Failed to retrieve VES data from the API."}
+        
+        logging.debug(f"get_ves_data response: {response.json()}")
+        return response.json()
+        
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error getting VES data: {str(e)}")
+        return {"error": "Failed to connect to VES API."}
+
+@app.get("/ves/{registration}")
+def get_ves(registration: str) -> dict:
+    return get_ves_data(registration)
+
 @app.get("/mot/{registration}")
 def get_mot_history(registration: str) -> dict:
     """Get MOT history for a vehicle registration number."""
