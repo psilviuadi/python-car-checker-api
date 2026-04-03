@@ -1,0 +1,150 @@
+.car-details-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.6s ease-out 0.3s both;
+}
+
+.car-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.car-info h2 {
+  font-size: 2.2em;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.registration {
+  font-size: 1.4em;
+  color: #667eea;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.1em;
+  margin-bottom: 5px;
+}
+
+.year {
+  color: #666;
+  font-size: 0.95em;
+}
+
+.vehicle-status {
+  display: flex;
+  gap: 15px;
+}
+
+.status-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 20px;
+  border-radius: 8px;
+  min-width: 120px;
+  text-align: center;
+}
+
+.status-label {
+  font-size: 0.85em;
+  font-weight: 600;
+  opacity: 0.7;
+  margin-bottom: 5px;
+}
+
+.status-value {
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.mot-passed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.mot-failed {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.tax-taxed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.tax-not taxed {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.car-props-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.car-prop {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.car-prop label {
+  display: block;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.car-prop value {
+  display: block;
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #333;
+  word-break: break-word;
+}
+
+.highlight-warning {
+  color: #d32f2f;
+  font-weight: 700;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .car-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .car-info h2 {
+    font-size: 1.6em;
+  }
+
+  .vehicle-status {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .car-props-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
