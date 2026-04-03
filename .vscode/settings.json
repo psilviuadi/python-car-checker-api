@@ -1,0 +1,12 @@
+{
+    "terminal.integrated.profiles.windows": {
+        "PowerShell-Bypass": {
+            "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "args": [
+                "-NoExit",
+                "-ExecutionPolicy", "Bypass"
+            ]
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell-Bypass"
+}
