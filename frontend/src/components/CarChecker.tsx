@@ -60,8 +60,8 @@ const CarChecker: React.FC = () => {
       {carData && (
         <div className="results">
           <CarDetails mot={carData.mot} ves={carData.ves} />
-          <VESDetails ves={carData.ves} />
           <MOTHistory tests={carData.mot.motTests} />
+          <VESDetails ves={carData.ves} />
         </div>
       )}
     </div>

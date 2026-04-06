@@ -11,6 +11,15 @@ const CarDetails: React.FC<CarDetailsProps> = ({ mot, ves }) => {
   const latestMOT = mot.motTests.length > 0 ? mot.motTests[0] : null
   const motStatus = latestMOT ? latestMOT.testResult : 'Unknown'
   const motExpiryDate = latestMOT ? latestMOT.expiryDate : 'N/A'
+  
+  // Calculate MTG (Miles To Go) - rough estimate
+  const estimateAnnualMileage = 12000
+  const currentOdometer = latestMOT ? parseInt(latestMOT.odometerValue) : null
+  const yearsSinceManufacture = new Date().getFullYear() - ves.yearOfManufacture
+  const estimatedTotalMileage = yearsSinceManufacture * estimateAnnualMileage
+  const mtgEstimate = currentOdometer 
+    ? Math.max(0, estimatedTotalMileage - currentOdometer)
+    : null
 
   return (
     <div className="car-details-card">
@@ -34,10 +43,6 @@ const CarDetails: React.FC<CarDetailsProps> = ({ mot, ves }) => {
 
       <div className="car-props-grid">
         <div className="car-prop">
-          <label>Registration</label>
-          <value>{mot.registration}</value>
-        </div>
-        <div className="car-prop">
           <label>Fuel Type</label>
           <value>{mot.fuelType}</value>
         </div>
@@ -50,14 +55,6 @@ const CarDetails: React.FC<CarDetailsProps> = ({ mot, ves }) => {
           <value>{mot.engineSize}cc</value>
         </div>
         <div className="car-prop">
-          <label>Engine Capacity</label>
-          <value>{ves.engineCapacity}cc</value>
-        </div>
-        <div className="car-prop">
-          <label>CO2 Emissions</label>
-          <value>{ves.co2Emissions}g/km</value>
-        </div>
-        <div className="car-prop">
           <label>MOT Expiry</label>
           <value>{motExpiryDate ? new Date(motExpiryDate).toLocaleDateString() : 'N/A'}</value>
         </div>
@@ -65,16 +62,12 @@ const CarDetails: React.FC<CarDetailsProps> = ({ mot, ves }) => {
           <label>Tax Due Date</label>
           <value>{new Date(ves.taxDueDate).toLocaleDateString()}</value>
         </div>
-        <div className="car-prop">
-          <label>Outstanding Recall</label>
-          <value className={mot.hasOutstandingRecall === 'Yes' ? 'highlight-warning' : ''}>
-            {mot.hasOutstandingRecall}
-          </value>
-        </div>
-        <div className="car-prop">
-          <label>Type Approval</label>
-          <value>{ves.typeApproval}</value>
-        </div>
+        {mtgEstimate !== null && (
+          <div className="car-prop">
+            <label>Est. Miles to Go</label>
+            <value>{mtgEstimate.toLocaleString()}</value>
+          </div>
+        )}
       </div>
     </div>
   )
